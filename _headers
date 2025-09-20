@@ -1,0 +1,9 @@
+/* Security and cache headers for Vercel (optional)
+https://vercel.com/docs/projects/configuration#headers
+*/
+# Add security headers for all responses
+/* 
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer-when-downgrade
+*/
