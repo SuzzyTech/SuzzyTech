@@ -31,7 +31,7 @@
 <!-- Projects with tabs and search -->
 <section id="projects" class="py-12">
   <h2 class="text-2xl font-bold mb-4">Projects</h2>
-  <p class="text-gray-400 mb-6">Filter and search projects. Currently showcasing WhatsApp bots — Raganork.</p>
+  <p class="text-gray-400 mb-6">Filter and search projects. Currently showcasing WhatsApp bots.</p>
 
   <div class="mb-4">
     <div class="flex gap-2">
@@ -45,18 +45,17 @@
   <div class="mb-6">
     <input id="project-search" type="search" placeholder="Search projects..." class="w-full p-3 rounded-md bg-gray-800" />
   </div>
-
-  <div id="project-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <!-- Project Card: Raganork (Bots) -->
-    <div class="project-card" data-tags="raganork bot whatsapp" data-type="bots">
-      <a href="https://raganork.suzzytech.site" target="_blank" class="block bg-gray-800 rounded-lg overflow-hidden shadow-md">
-        <img src="https://i.imgur.com/PLACEHOLDER-RAGANORK.jpg" alt="Raganork preview" class="w-full h-40 object-cover">
-        <div class="p-4">
-          <h3 class="font-semibold text-xl">Raganork</h3>
-          <p class="text-gray-400 text-sm mt-2">WhatsApp automation bot — message workflows, media handling, easy deployment.</p>
-        </div>
-      </a>
+  
+  <div class="project-card" data-tags="raganork bot whatsapp" data-type="bots">
+  <div class="block bg-gray-800 rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+    <img src="https://i.imgur.com/PLACEHOLDER-RAGANORK.jpg" alt="Raganork preview" class="w-full h-40 object-cover">
+    <div class="p-4 flex flex-col flex-grow">
+      <h3 class="font-semibold text-xl">Raganork</h3>
+      <p class="text-gray-400 text-sm mt-2 flex-grow">WhatsApp automation bot — message workflows, media handling, easy deployment.</p>
+      <a href="https://raganork.suzzytech.site" target="_blank" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md text-center">Explore</a>
     </div>
+  </div>
+</div>
 
     <!-- Example website/tool placeholders -->
     <div class="project-card" data-tags="suzzytech portal website" data-type="websites">
