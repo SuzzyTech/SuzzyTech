@@ -1,71 +1,160 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SuzzyTech - Leading innovations in WhatsApp bots, automation, web development, and tech solutions.">
-  <meta name="keywords" content="WhatsApp bot, SuzzyTech, automation, web development, AI bots, tech solutions, phone tips, computer tips, SEO, programming">
-  <meta name="author" content="SuzzyTech">
-  <title>SuzzyTech | WhatsApp Bots & Tech Innovations</title>
-  <style>
-    body {font-family: Arial, sans-serif; margin:0; padding:0; line-height:1.6; background:#f4f4f9; color:#333;}
-    header {background:#222; color:#fff; padding:20px 0; text-align:center;}
-    header img {width:100px; height:100px; border-radius:50%; display:block; margin:0 auto 10px;}
-    nav {background:#444; padding:10px; text-align:center;}
-    nav a {color:#fff; margin:0 15px; text-decoration:none; font-weight:bold;}
-    nav input {padding:5px; margin-left:15px;}
-    .container {width:90%; margin:auto; overflow:hidden; padding:20px;}
-    h1, h2, h3 {color:#111;}
-    .project {background:#fff; margin:20px 0; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-    .faq {background:#fff; padding:20px; border-radius:8px; margin:20px 0; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-    .faq input {width:100%; padding:8px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px;}
-    .faq-item {margin-bottom:15px;}
-    .faq-item h4 {margin:0; cursor:pointer; color:#007BFF;}
-    .faq-item p {display:none; margin-top:5px;}
-    footer {background:#222; color:#fff; text-align:center; padding:15px; margin-top:20px;}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Suzzy Tech — WhatsApp Bots, Tools & Tech Projects</title>
+<meta name="description" content="Suzzy Tech builds WhatsApp bots, websites and other tech projects. Explore Raganork and find answers to technical questions about bots, devices, hosting and web development." />
+<meta name="keywords" content="WhatsApp bot, tech projects, web development, VPS, Raganork, Suzzy Tech" />
+<link rel="canonical" href="https://suzzytech.site/" />
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <header>
-    <img src="https://i.imgur.com/p5OkOEk.jpeg" alt="SuzzyTech Logo">
-    <h1>SuzzyTech</h1>
-    <p>Innovating WhatsApp Bots, Web Development & Future Tech</p>
-  </header>
-  <nav>
-    <a href="#projects">Projects</a>
-    <a href="#faq">FAQ</a>
-    <a href="https://www.youtube.com/@SuzzyTech" target="_blank">YouTube</a>
-    <a href="https://whatsapp.com/channel/0029Vb6czaK3GJP2Dngjjj09" target="_blank">WhatsApp Channel</a>
-    <input type="text" id="projectSearch" placeholder="Search projects...">
-  </nav>
-  <div class="container">
-    <section id="projects">
-      <h2>Our Projects</h2>
-      <div class="project">
-        <h3>Raganork - WhatsApp Bot</h3>
-        <img src="https://via.placeholder.com/400x200" alt="Raganork Preview" style="max-width:100%; border-radius:6px;">
-        <p>Raganork is a next-generation WhatsApp bot built to automate messaging, handle group management, and provide advanced features. <a href="https://raganork.suzzytech.site" target="_blank">Learn more</a>.</p>
-      </div>
-    </section>
-    <section id="faq" class="faq">
-      <h2>Frequently Asked Questions</h2>
-      <input type="text" id="faqSearch" placeholder="Search FAQs...">
-      <div id="faqList"></div>
-    </section>
+<body class="bg-gray-900 text-white">
+
+<header class="py-6">
+  <div class="max-w-5xl mx-auto flex items-center justify-center flex-col gap-4">
+    <img src="https://i.imgur.com/p5OkOEk.jpeg" alt="Suzzy Tech" class="w-28 h-28 rounded-full border-4 border-white object-cover shadow-xl" />
+    <div class="text-center">
+      <h1 class="text-3xl md:text-4xl font-bold">Suzzy Tech</h1>
+      <p class="text-gray-300">Building bots, websites, and practical tech tools for creators and businesses.</p>
+    </div>
+    <div class="mt-3 flex gap-3">
+      <a href="https://www.youtube.com/@SuzzyTech" target="_blank" class="px-4 py-2 bg-red-600 rounded-md">YouTube</a>
+      <a href="https://whatsapp.com/channel/0029Vb6czaK3GJP2Dngjjj09" target="_blank" class="px-4 py-2 bg-green-600 rounded-md">WhatsApp</a>
+    </div>
   </div>
-  <footer>
-    <p>&copy; 2025 SuzzyTech. All Rights Reserved.</p>
-  </footer>
-  <script src="faq.js"></script>
-  <script>
-    document.getElementById('projectSearch').addEventListener('keyup', function() {
-      let query = this.value.toLowerCase();
-      let projects = document.querySelectorAll('.project');
-      projects.forEach(p => {
-        p.style.display = p.innerText.toLowerCase().includes(query) ? 'block' : 'none';
-      });
-    });
-  </script>
+</header>
+
+<main class="max-w-6xl mx-auto px-4">
+
+<!-- Projects with tabs and search -->
+<section id="projects" class="py-12">
+  <h2 class="text-2xl font-bold mb-4">Projects</h2>
+  <p class="text-gray-400 mb-6">Filter and search projects. Currently showcasing WhatsApp bots — Raganork.</p>
+
+  <div class="mb-4">
+    <div class="flex gap-2">
+      <button class="tab-btn px-4 py-2 bg-gray-700 rounded-md" data-tab="all">All</button>
+      <button class="tab-btn px-4 py-2 bg-blue-600 rounded-md" data-tab="bots">Bots</button>
+      <button class="tab-btn px-4 py-2 bg-gray-700 rounded-md" data-tab="websites">Websites</button>
+      <button class="tab-btn px-4 py-2 bg-gray-700 rounded-md" data-tab="tools">Tools</button>
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <input id="project-search" type="search" placeholder="Search projects..." class="w-full p-3 rounded-md bg-gray-800" />
+  </div>
+
+  <div id="project-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Project Card: Raganork (Bots) -->
+    <div class="project-card" data-tags="raganork bot whatsapp" data-type="bots">
+      <a href="https://raganork.suzzytech.site" target="_blank" class="block bg-gray-800 rounded-lg overflow-hidden shadow-md">
+        <img src="https://i.imgur.com/PLACEHOLDER-RAGANORK.jpg" alt="Raganork preview" class="w-full h-40 object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold text-xl">Raganork</h3>
+          <p class="text-gray-400 text-sm mt-2">WhatsApp automation bot — message workflows, media handling, easy deployment.</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Example website/tool placeholders -->
+    <div class="project-card" data-tags="suzzytech portal website" data-type="websites">
+      <div class="block bg-gray-800 rounded-lg overflow-hidden shadow-md p-4 h-full flex flex-col justify-between">
+        <div>
+          <h3 class="font-semibold text-xl">SuzzyTech Portal</h3>
+          <p class="text-gray-400 text-sm mt-2">Official portal and blog for guides and projects.</p>
+        </div>
+        <div class="text-sm text-gray-500 mt-4">Coming soon</div>
+      </div>
+    </div>
+
+    <div class="project-card" data-tags="automation toolkit scripts" data-type="tools">
+      <div class="block bg-gray-800 rounded-lg overflow-hidden shadow-md p-4 h-full flex flex-col justify-between">
+        <div>
+          <h3 class="font-semibold text-xl">Automation Toolkit</h3>
+          <p class="text-gray-400 text-sm mt-2">Utilities and scripts to help with deployments and testing.</p>
+        </div>
+        <div class="text-sm text-gray-500 mt-4">Coming soon</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ with search -->
+<section id="faq" class="py-12">
+  <h2 class="text-2xl font-bold mb-4">Tech Q&A Library</h2>
+  <p class="text-gray-400 mb-4">Search 400+ professional Q&amp;A covering WhatsApp bots, web, phones, hosting, and security.</p>
+  <div class="mb-4">
+    <input id="faq-search" type="search" placeholder="Search Q&amp;A (try: deploy, VPS, bot)..." class="w-full p-3 rounded-md bg-gray-800" />
+  </div>
+
+  <div id="faq-list" class="space-y-3">
+    <!-- FAQ items will be injected by JS -->
+  </div>
+</section>
+
+</main>
+
+<footer class="py-8 text-center text-gray-400">
+  © 2025 Suzzy Tech · suzzytech.site
+</footer>
+
+<script src="faq.js"></script>
+<script>
+// Tabs
+const tabButtons = document.querySelectorAll('.tab-btn');
+let activeTab = 'bots'; // default active
+tabButtons.forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    tabButtons.forEach(function(b){ b.classList.remove('bg-blue-600'); b.classList.add('bg-gray-700'); });
+    btn.classList.remove('bg-gray-700'); btn.classList.add('bg-blue-600');
+    activeTab = btn.dataset.tab;
+    filterProjects();
+  });
+});
+tabButtons.forEach(function(b){ if(b.dataset.tab===activeTab){ b.classList.remove('bg-gray-700'); b.classList.add('bg-blue-600'); }});
+
+// Project search & filter
+const projectSearch = document.getElementById('project-search');
+const projectCards = Array.from(document.querySelectorAll('.project-card'));
+projectSearch.addEventListener('input', filterProjects);
+function filterProjects() {
+  const q = projectSearch.value.trim().toLowerCase();
+  projectCards.forEach(function(card) {
+    const tags = card.dataset.tags.toLowerCase();
+    const type = card.dataset.type.toLowerCase();
+    const matchesTab = (activeTab === 'all') || (type === activeTab);
+    const matchesQuery = q === '' || tags.includes(q) || tags.split(' ').some(function(t){ return t.startsWith(q); });
+    card.style.display = (matchesTab && matchesQuery) ? 'block' : 'none';
+  });
+}
+
+// FAQ populate and search
+/* faqData moved to faq.js */
+const faqList = document.getElementById('faq-list');
+function renderFAQ(items) {
+  faqList.innerHTML = '';
+  items.forEach(function(it) {
+    const el = document.createElement('details');
+    el.className = 'bg-gray-800 rounded-md p-4';
+    el.innerHTML = '<summary class="font-semibold">' + it.question + '</summary><div class="mt-2 text-gray-300">' + it.answer + '</div>';
+    faqList.appendChild(el);
+  });
+}
+// initial render (all 400)
+renderFAQ(faqData);
+
+// FAQ search
+const faqSearch = document.getElementById('faq-search');
+faqSearch.addEventListener('input', function() {
+  const q = faqSearch.value.trim().toLowerCase();
+  if (!q) { renderFAQ(faqData); return; }
+  const filtered = faqData.filter(function(it){ return (it.question + ' ' + it.answer + ' ' + it.category).toLowerCase().includes(q); });
+  renderFAQ(filtered);
+});
+</script>
+
 </body>
 </html>
