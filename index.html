@@ -1,111 +1,71 @@
-<script>
-// Tabs
-const tabButtons = document.querySelectorAll('.tab-btn');
-let activeTab = 'bots'; // default active
-tabButtons.forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    tabButtons.forEach(function(b){ b.classList.remove('bg-blue-600'); b.classList.add('bg-gray-700'); });
-    btn.classList.remove('bg-gray-700'); btn.classList.add('bg-blue-600');
-    activeTab = btn.dataset.tab;
-    filterProjects();
-  });
-});
-tabButtons.forEach(function(b){ if(b.dataset.tab===activeTab){ b.classList.remove('bg-gray-700'); b.classList.add('bg-blue-600'); }});
 
-// Project search & filter
-const projectSearch = document.getElementById('project-search');
-const projectCards = Array.from(document.querySelectorAll('.project-card'));
-projectSearch.addEventListener('input', filterProjects);
-function filterProjects() {
-  const q = projectSearch.value.trim().toLowerCase();
-  projectCards.forEach(function(card) {
-    const tags = card.dataset.tags.toLowerCase();
-    const type = card.dataset.type.toLowerCase();
-    const matchesTab = (activeTab === 'all') || (type === activeTab);
-    const matchesQuery = q === '' || tags.includes(q) || tags.split(' ').some(function(t){ return t.startsWith(q); });
-    card.style.display = (matchesTab && matchesQuery) ? 'block' : 'none';
-  });
-}
-
-// ✅ FAQ populate and search with 50 SEO-rich Q&A
-const faqData = [
-  { id: 1, category: "Basics", question: "What is a WhatsApp bot and how does it work?", answer: "A WhatsApp bot is an automated program that interacts with users on WhatsApp, answering queries, sending updates, and performing tasks without manual input." },
-  { id: 2, category: "Basics", question: "Can I use a WhatsApp bot for business growth?", answer: "Yes, WhatsApp bots help businesses with customer support, order processing, lead generation, and marketing automation." },
-  { id: 3, category: "Basics", question: "Do I need a separate phone number for a WhatsApp bot?", answer: "Yes, typically a dedicated phone number is required to set up a WhatsApp bot for business or personal automation." },
-  { id: 4, category: "Basics", question: "Are WhatsApp bots legal to use?", answer: "Yes, they are legal if you comply with WhatsApp Business API policies and avoid spammy behavior." },
-  { id: 5, category: "Basics", question: "What is the difference between a WhatsApp bot and a chatbot?", answer: "A chatbot is a general automation tool for messaging apps, while a WhatsApp bot specifically works inside WhatsApp." },
-  { id: 6, category: "Basics", question: "How can a WhatsApp bot help small businesses?", answer: "It helps small businesses by providing 24/7 customer support, automated responses, and efficient sales handling." },
-  { id: 7, category: "Basics", question: "Do I need coding skills to create a WhatsApp bot?", answer: "No, you can use platforms with no-code solutions, but coding knowledge allows more customization." },
-  { id: 8, category: "Basics", question: "What are the advantages of using WhatsApp bots?", answer: "Key benefits include instant replies, lead capture, customer support automation, and time savings." },
-
-  { id: 9, category: "Technical", question: "How do I host a WhatsApp bot on a VPS?", answer: "You need to set up a server, install dependencies, deploy your bot code, and keep it running 24/7." },
-  { id: 10, category: "Technical", question: "Which programming languages are best for building WhatsApp bots?", answer: "Popular options include JavaScript (Node.js), Python, PHP, and Java." },
-  { id: 11, category: "Technical", question: "How do I connect my bot with the WhatsApp Business API?", answer: "You can apply for WhatsApp Business API access or use third-party providers that simplify integration." },
-  { id: 12, category: "Technical", question: "What is a webhook in WhatsApp bots?", answer: "A webhook allows WhatsApp to send real-time messages and events from users to your bot’s server." },
-  { id: 13, category: "Technical", question: "How do I secure my WhatsApp bot’s API keys?", answer: "Always use environment variables, encrypted storage, and restrict access to your keys." },
-  { id: 14, category: "Technical", question: "How do I scale a WhatsApp bot for thousands of users?", answer: "Use load balancing, database optimization, and cloud hosting to handle high traffic." },
-  { id: 15, category: "Technical", question: "Can I integrate my WhatsApp bot with databases?", answer: "Yes, databases like MySQL, MongoDB, or Firebase can store user data and chat history." },
-  { id: 16, category: "Technical", question: "Can I integrate WhatsApp bots with payment systems?", answer: "Yes, bots can connect to Paystack, Stripe, or PayPal to handle payments via links." },
-
-  { id: 17, category: "Phones", question: "Can I run a WhatsApp bot on my phone?", answer: "Yes, but it is limited. For long-term use, VPS or cloud hosting is recommended." },
-  { id: 18, category: "Phones", question: "Do WhatsApp bots drain battery on mobile?", answer: "Yes, if run directly on a phone, but VPS/cloud bots avoid this issue." },
-  { id: 19, category: "Phones", question: "How do I test a WhatsApp bot on Android?", answer: "Install dependencies (Node.js/Python), run your script, and connect via WhatsApp Web or API." },
-  { id: 20, category: "Phones", question: "Do iPhone bots work the same as Android bots?", answer: "Yes, the bot logic runs on servers, so device type does not matter." },
-  { id: 21, category: "Phones", question: "How do bots handle media messages like images and videos?", answer: "Bots can be programmed to send, receive, and process media files via WhatsApp Business API." },
-  { id: 22, category: "Phones", question: "Can I use multiple WhatsApp bots on one phone?", answer: "Not directly. Each bot requires its own number or account." },
-
-  { id: 23, category: "Computers", question: "How do I run a WhatsApp bot locally on PC?", answer: "You install Node.js or Python, run the bot script, and keep it connected to WhatsApp Web or API." },
-  { id: 24, category: "Computers", question: "What are the system requirements to run a WhatsApp bot?", answer: "A PC with at least 2GB RAM, stable internet, and Node.js/Python installed is enough for small bots." },
-  { id: 25, category: "Computers", question: "Can I run a WhatsApp bot without internet?", answer: "No, bots need constant internet to send and receive messages." },
-  { id: 26, category: "Computers", question: "How do I make my WhatsApp bot run 24/7?", answer: "Use VPS hosting or cloud servers to keep your bot active nonstop." },
-  { id: 27, category: "Computers", question: "Can I run a WhatsApp bot inside Docker?", answer: "Yes, Docker helps containerize bots for easier deployment and scaling." },
-  { id: 28, category: "Computers", question: "Can I run multiple bots on the same computer?", answer: "Yes, with separate processes or Docker containers, you can run multiple bots." },
-
-  { id: 29, category: "Business", question: "How can WhatsApp bots help e-commerce stores?", answer: "They automate order confirmations, product recommendations, and shipping updates." },
-  { id: 30, category: "Business", question: "Can WhatsApp bots collect customer feedback?", answer: "Yes, they can send surveys, polls, and feedback forms automatically." },
-  { id: 31, category: "Business", question: "How do WhatsApp bots help with lead generation?", answer: "They capture user details, qualify leads, and send automated follow-ups." },
-  { id: 32, category: "Business", question: "Can I integrate my WhatsApp bot with CRM systems?", answer: "Yes, CRMs like HubSpot, Zoho, or Salesforce can integrate with WhatsApp bots." },
-  { id: 33, category: "Business", question: "Are WhatsApp bots good for customer service?", answer: "Yes, they provide instant replies, 24/7 support, and reduce response times." },
-  { id: 34, category: "Business", question: "Can WhatsApp bots handle appointment bookings?", answer: "Yes, they can schedule appointments, send reminders, and confirm bookings." },
-  { id: 35, category: "Business", question: "Can WhatsApp bots improve sales conversions?", answer: "Yes, automated responses and personalized offers increase conversion rates." },
-
-  { id: 36, category: "Security", question: "Are WhatsApp bots safe to use?", answer: "Yes, if built securely and following WhatsApp’s official guidelines." },
-  { id: 37, category: "Security", question: "How do I protect my WhatsApp bot from hackers?", answer: "Use strong authentication, encrypted connections, and API key protection." },
-  { id: 38, category: "Security", question: "Can WhatsApp bots be blocked by WhatsApp?", answer: "Yes, if they violate policies, send spam, or misuse user data." },
-  { id: 39, category: "Security", question: "Do WhatsApp bots store personal data?", answer: "They can, but developers should comply with GDPR and privacy laws." },
-  { id: 40, category: "Security", question: "Can users opt-out of WhatsApp bot messages?", answer: "Yes, bots should include an opt-out option to respect user preferences." },
-  { id: 41, category: "Security", question: "Do WhatsApp bots use end-to-end encryption?", answer: "Messages between users are encrypted, but server-side storage depends on your setup." },
-  { id: 42, category: "Security", question: "How do I prevent spam with WhatsApp bots?", answer: "Send only useful messages, follow API limits, and avoid bulk spamming." },
-
-  { id: 43, category: "SEO", question: "How do WhatsApp bots help digital marketing?", answer: "They improve engagement, retarget leads, and deliver promotions instantly." },
-  { id: 44, category: "SEO", question: "Can WhatsApp bots be used for affiliate marketing?", answer: "Yes, they can share affiliate links, promotions, and track user clicks." },
-  { id: 45, category: "SEO", question: "Do WhatsApp bots improve SEO indirectly?", answer: "Yes, by improving engagement, reducing bounce rates, and increasing traffic." },
-  { id: 46, category: "SEO", question: "Can WhatsApp bots replace email marketing?", answer: "They don’t replace emails but provide faster and more engaging communication." },
-  { id: 47, category: "SEO", question: "How can WhatsApp bots help social media growth?", answer: "They can auto-reply to inquiries, share content, and boost engagement." },
-  { id: 48, category: "SEO", question: "Can WhatsApp bots drive traffic to websites?", answer: "Yes, they can share links, updates, and encourage users to visit your site." },
-  { id: 49, category: "SEO", question: "Are WhatsApp bots good for influencer marketing?", answer: "Yes, influencers use them to broadcast updates, promotions, and product launches." },
-  { id: 50, category: "SEO", question: "How can I use WhatsApp bots for brand awareness?", answer: "Consistent automation, personalized messages, and instant replies strengthen brand presence." }
-];
-
-const faqList = document.getElementById('faq-list');
-function renderFAQ(items) {
-  faqList.innerHTML = '';
-  items.forEach(function(it) {
-    const el = document.createElement('details');
-    el.className = 'bg-gray-800 rounded-md p-4';
-    el.innerHTML = '<summary class="font-semibold">' + it.question + '</summary><div class="mt-2 text-gray-300">' + it.answer + '</div>';
-    faqList.appendChild(el);
-  });
-}
-// initial render (all 50)
-renderFAQ(faqData);
-
-// FAQ search
-const faqSearch = document.getElementById('faq-search');
-faqSearch.addEventListener('input', function() {
-  const q = faqSearch.value.trim().toLowerCase();
-  if (!q) { renderFAQ(faqData); return; }
-  const filtered = faqData.filter(function(it){ return (it.question + ' ' + it.answer + ' ' + it.category).toLowerCase().includes(q); });
-  renderFAQ(filtered);
-});
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SuzzyTech - Leading innovations in WhatsApp bots, automation, web development, and tech solutions.">
+  <meta name="keywords" content="WhatsApp bot, SuzzyTech, automation, web development, AI bots, tech solutions, phone tips, computer tips, SEO, programming">
+  <meta name="author" content="SuzzyTech">
+  <title>SuzzyTech | WhatsApp Bots & Tech Innovations</title>
+  <style>
+    body {font-family: Arial, sans-serif; margin:0; padding:0; line-height:1.6; background:#f4f4f9; color:#333;}
+    header {background:#222; color:#fff; padding:20px 0; text-align:center;}
+    header img {width:100px; height:100px; border-radius:50%; display:block; margin:0 auto 10px;}
+    nav {background:#444; padding:10px; text-align:center;}
+    nav a {color:#fff; margin:0 15px; text-decoration:none; font-weight:bold;}
+    nav input {padding:5px; margin-left:15px;}
+    .container {width:90%; margin:auto; overflow:hidden; padding:20px;}
+    h1, h2, h3 {color:#111;}
+    .project {background:#fff; margin:20px 0; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+    .faq {background:#fff; padding:20px; border-radius:8px; margin:20px 0; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+    .faq input {width:100%; padding:8px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px;}
+    .faq-item {margin-bottom:15px;}
+    .faq-item h4 {margin:0; cursor:pointer; color:#007BFF;}
+    .faq-item p {display:none; margin-top:5px;}
+    footer {background:#222; color:#fff; text-align:center; padding:15px; margin-top:20px;}
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.imgur.com/p5OkOEk.jpeg" alt="SuzzyTech Logo">
+    <h1>SuzzyTech</h1>
+    <p>Innovating WhatsApp Bots, Web Development & Future Tech</p>
+  </header>
+  <nav>
+    <a href="#projects">Projects</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://www.youtube.com/@SuzzyTech" target="_blank">YouTube</a>
+    <a href="https://whatsapp.com/channel/0029Vb6czaK3GJP2Dngjjj09" target="_blank">WhatsApp Channel</a>
+    <input type="text" id="projectSearch" placeholder="Search projects...">
+  </nav>
+  <div class="container">
+    <section id="projects">
+      <h2>Our Projects</h2>
+      <div class="project">
+        <h3>Raganork - WhatsApp Bot</h3>
+        <img src="https://via.placeholder.com/400x200" alt="Raganork Preview" style="max-width:100%; border-radius:6px;">
+        <p>Raganork is a next-generation WhatsApp bot built to automate messaging, handle group management, and provide advanced features. <a href="https://raganork.suzzytech.site" target="_blank">Learn more</a>.</p>
+      </div>
+    </section>
+    <section id="faq" class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <input type="text" id="faqSearch" placeholder="Search FAQs...">
+      <div id="faqList"></div>
+    </section>
+  </div>
+  <footer>
+    <p>&copy; 2025 SuzzyTech. All Rights Reserved.</p>
+  </footer>
+  <script src="faq.js"></script>
+  <script>
+    document.getElementById('projectSearch').addEventListener('keyup', function() {
+      let query = this.value.toLowerCase();
+      let projects = document.querySelectorAll('.project');
+      projects.forEach(p => {
+        p.style.display = p.innerText.toLowerCase().includes(query) ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
